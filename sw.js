@@ -1,14 +1,16 @@
 // sw.js
 // Service Worker básico: precachea el App Shell (incluido geo-helper.js) con estrategia Cache First.
 
-const CACHE_NAME = 'geo-static-v1';
+const CACHE_NAME = 'geo-static-v2'; // v2: se agregaron los íconos
 const STATIC_FILES = [
   './',
   './index.html',
   './styles.css',
   './geo-helper.js',
   './app.js',
-  './manifest.json'
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {

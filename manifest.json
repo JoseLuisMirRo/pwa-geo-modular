@@ -1,0 +1,10 @@
+{
+  "name": "Reporte Geolocalizado PWA",
+  "short_name": "GeoReporte",
+  "description": "Reportes técnicos con geolocalización consciente y plan B manual.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a"
+}

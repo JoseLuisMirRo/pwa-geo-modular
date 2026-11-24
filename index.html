@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Reporte Geolocalizado PWA</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="barra">
+    <h1>Reporte Técnico</h1>
+  </header>
+
+  <main class="contenedor">
+    <!-- Formulario de negocio que consumirá el helper -->
+    <section class="tarjeta">
+      <h2>Nuevo reporte</h2>
+      <form id="form-reporte">
+        <label for="titulo">Título</label>
+        <input id="titulo" type="text" placeholder="Ej. Fuga en tubería" required>
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" rows="3" placeholder="Describe la incidencia"></textarea>
+
+        <div class="acciones">
+          <!-- type="button": no envía el formulario, solo inicia el flujo de ubicación -->
+          <button id="btn-adjuntar-ubicacion" type="button" class="btn btn-primario">Adjuntar mi ubicación</button>
+          <button id="btn-sucursales" type="button" class="btn btn-secundario">Sucursal más cercana</button>
+        </div>
+      </form>
+
+      <p id="mensaje-estado" class="estado" role="status" aria-live="polite">Sin ubicación adjunta.</p>
+    </section>
+
+    <!-- Paso 1: pre-permiso (solo cuando el estado es 'prompt') -->
+    <section id="aviso-ubicacion" class="tarjeta tarjeta-aviso" hidden>
+      <h2>¿Por qué pedimos tu ubicación?</h2>
+      <p>Necesitamos tu ubicación aproximada para adjuntar las coordenadas al reporte técnico y calcular la sucursal más cercana.</p>
+      <p>Se lee una sola vez, solo cuando tú lo pides. No se rastrea tu movimiento.</p>
+      <div class="acciones">
+        <button id="btn-confirmar-ubicacion" type="button" class="btn btn-primario">Compartir mi ubicación</button>
+        <button id="btn-zona-manual" type="button" class="btn btn-secundario">Prefiero escribir mi zona</button>
+      </div>
+    </section>
+
+    <!-- Resultado + indicador de calidad de señal -->
+    <section id="resultado-ubicacion" class="tarjeta" hidden>
+      <div class="resultado-encabezado">
+        <h2>Ubicación adjunta</h2>
+        <span id="badge-precision" class="badge"></span>
+      </div>
+      <dl class="datos">
+        <dt>Latitud</dt><dd id="dato-latitud">—</dd>
+        <dt>Longitud</dt><dd id="dato-longitud">—</dd>
+        <dt>Precisión</dt><dd id="dato-precision">—</dd>
+        <dt>Hora de lectura</dt><dd id="dato-hora">—</dd>
+      </dl>
+      <a id="enlace-mapa" class="enlace" href="#" target="_blank" rel="noopener">Ver en el mapa</a>
+    </section>
+
+    <!-- Plan B: selector manual (rechazo, sin GPS, TIMEOUT) -->
+    <section id="selector-manual" class="tarjeta tarjeta-info" hidden>
+      <h2>Indica tu zona manualmente</h2>
+      <p id="ayuda-permiso" class="ayuda" hidden>
+        El permiso está bloqueado. Para reactivarlo toca el ícono del candado junto a la dirección
+        → Permisos → Ubicación → Permitir. En iPhone: Ajustes → Apps → Safari → Ubicación → Preguntar.
+      </p>
+      <label for="select-zona">Ciudad / zona</label>
+      <select id="select-zona"></select>
+
+      <label for="input-direccion">Dirección o referencia (opcional)</label>
+      <input id="input-direccion" type="text" placeholder="Calle, número, colonia">
+
+      <div class="acciones">
+        <button id="btn-usar-zona" type="button" class="btn btn-primario">Usar esta zona</button>
+      </div>
+    </section>
+
+    <!-- Paquete que se enviaría o encolaría en IndexedDB -->
+    <section id="tarjeta-paquete" class="tarjeta" hidden>
+      <h2>Paquete listo para enviar</h2>
+      <pre id="vista-paquete" class="paquete"></pre>
+    </section>
+  </main>
+
+  <!-- Orden obligatorio: primero el helper, luego quien lo consume -->
+  <script src="./geo-helper.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

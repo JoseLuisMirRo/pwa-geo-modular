@@ -1,0 +1,205 @@
+:root {
+  --fondo: #0f172a;
+  --superficie: #1e293b;
+  --borde: #334155;
+  --texto: #e2e8f0;
+  --texto-suave: #94a3b8;
+  --primario: #38bdf8;
+  --primario-texto: #0f172a;
+  --exito: #4ade80;
+  --peligro: #f87171;
+  --aviso: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Sin esta regla, un "display" de otra clase le gana al atributo hidden */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+.barra {
+  padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.barra h1 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.contenedor {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  gap: 16px;
+}
+
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.tarjeta h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.tarjeta p {
+  margin: 0 0 12px;
+}
+
+.tarjeta-aviso {
+  border-color: var(--aviso);
+}
+
+.tarjeta-info {
+  border-color: var(--primario);
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 16px; /* evita el zoom automático de iOS al enfocar */
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primario {
+  background: var(--primario);
+  color: var(--primario-texto);
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--texto);
+  border-color: var(--borde);
+}
+
+.estado {
+  margin: 12px 0 0;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+.estado-ok {
+  color: var(--exito);
+}
+
+.estado-error {
+  color: var(--peligro);
+}
+
+.resultado-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.resultado-encabezado h2 {
+  margin: 0;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.badge-alta {
+  background: var(--exito);
+  color: #052e16;
+}
+
+.badge-aproximada {
+  background: var(--aviso);
+  color: #451a03;
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  margin: 0 0 12px;
+}
+
+.datos dt {
+  color: var(--texto-suave);
+}
+
+.datos dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.enlace {
+  color: var(--primario);
+}
+
+.ayuda {
+  font-size: 0.9rem;
+  color: var(--aviso);
+}
+
+.paquete {
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--fondo);
+  font-size: 0.8rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
